@@ -30,8 +30,11 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    @group.update(group_params)
+    if @group.update(group_params)
       redirect_to groups_path, notice: "Update Success"
+    else
+      render :edit
+    end
   end
   # update action:  接收 edit 里的表单送出的讯息，真正更新存在资料库里的资料。
 
