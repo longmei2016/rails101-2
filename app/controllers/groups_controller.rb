@@ -20,8 +20,11 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.save
+    if @group.save
       redirect_to groups_path
+    else
+      render :new
+    end
   end
   # create action:  接收 new 里的表单送出的讯息，变成一笔存在资料库里的资料
 
@@ -31,6 +34,13 @@ class GroupsController < ApplicationController
       redirect_to groups_path, notice: "Update Success"
   end
   # update action:  接收 edit 里的表单送出的讯息，真正更新存在资料库里的资料。
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    flash[:alert] = "Group deleted"
+      redirect_to groups_path
+  end
 
   private
 
