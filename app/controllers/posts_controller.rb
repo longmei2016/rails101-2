@@ -6,11 +6,9 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-
-
   def create
     @group = Group.find(params[:group_id])
-    @post = group.new(post_params)
+    @post = Post.new(post_params)
     @post.group = @group
     @post.user = current_user
 
